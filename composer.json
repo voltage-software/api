@@ -1,5 +1,5 @@
 {
-    "name": "Completeequipmentgroup/voltage-api",
+    "name": "completeequipmentgroup/voltage-api",
     "description": "Voltage API Laravel Package",
     "type": "library",
     "require": {
