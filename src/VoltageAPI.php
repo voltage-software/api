@@ -1,6 +1,6 @@
 <?php
 
-namespace Completeequipmentgroup\Current;
+namespace Completeequipmentgroup\Voltage;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
@@ -13,22 +13,21 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7;
 use GuzzleHttp\Exception\RequestException;
 
-class CurrentAPI
+class VoltageAPI
 {
 	protected $client;
 
 	public function __construct()
   {
-		$this->cache_length = Config::get('current.cache_length');
-		$this->log_message = "currentrms/api/v".Config::get('current.version');
+		$this->cache_length = Config::get('voltage.cache_length');
 
 		$this->client = new Client([
 			'cookies' => false,
-			'headers' => array(
-				"X-AUTH-TOKEN" => Config::get('current.api_key'),
-				"X-SUBDOMAIN" => Config::get('current.domain')
+			'auth' => array(
+				"username" => Config::get('voltage.api_user'),
+				"password" => Config::get('voltage.api_password')
 			),
-			'base_uri' => "https://api.current-rms.com/api/v".Config::get('current.version')."/",
+			'base_uri' => Config::get('voltage.api_url'),
 			'http_errors' => true
 		]);
   }

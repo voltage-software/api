@@ -1,6 +1,6 @@
 {
-    "name": "Completeequipmentgroup/current",
-    "description": "Current RMS Laravel Package",
+    "name": "Completeequipmentgroup/voltage-api",
+    "description": "Voltage API Laravel Package",
     "type": "library",
     "require": {
         "guzzlehttp/guzzle": "^6.3"
@@ -14,7 +14,7 @@
     ],
     "autoload": {
        "psr-4": {
-         "Completeequipmentgroup\\Current\\": "src"
+         "Completeequipmentgroup\\Voltage\\": "src"
        }
    },
    "scripts": {

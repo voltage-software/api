@@ -1,10 +1,10 @@
 <?php
 
-namespace Completeequipmentgroup\Current;
+namespace Completeequipmentgroup\Voltage;
 
 use Illuminate\Support\Facades\Facade;
 
-class Current extends Facade
+class Voltage extends Facade
 {
   /**
    * Get the registered name of the component.
@@ -13,6 +13,6 @@ class Current extends Facade
    */
 	protected static function getFacadeAccessor()
 	{
-  	return "Current";
+  	return "Voltage";
 	}
 }

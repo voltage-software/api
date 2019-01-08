@@ -1,10 +1,10 @@
 <?php
 
-namespace Completeequipmentgroup\Current;
+namespace Completeequipmentgroup\Voltage;
 
 use Illuminate\Support\ServiceProvider;
 
-class CurrentServiceProvider extends ServiceProvider
+class VoltageServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
@@ -13,7 +13,7 @@ class CurrentServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-      $this->publishes([__DIR__.'/Config/config.php' => config_path('current.php')]);
+      $this->publishes([__DIR__.'/Config/config.php' => config_path('voltage.php')]);
     }
 
     /**
@@ -23,8 +23,8 @@ class CurrentServiceProvider extends ServiceProvider
      */
     public function register()
     {
-      $this->app->bind('Current',function(){
-          return new \Completeequipmentgroup\Current\CurrentAPI;
+      $this->app->bind('Voltage',function(){
+          return new \Completeequipmentgroup\Voltage\VoltageAPI;
       });
     }
 }
