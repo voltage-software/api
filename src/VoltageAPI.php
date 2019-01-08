@@ -24,10 +24,7 @@ class VoltageAPI
 
 		$this->client = new Client([
 			'cookies' => false,
-			'auth' => array(
-				"username" => Config::get('voltage.api_user'),
-				"password" => Config::get('voltage.api_password')
-			),
+			'auth' => array(Config::get('voltage.api_user'),Config::get('voltage.api_password')),
 			'base_uri' => Config::get('voltage.api_url'),
 			'http_errors' => true
 		]);
