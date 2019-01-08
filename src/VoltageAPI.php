@@ -20,6 +20,7 @@ class VoltageAPI
 	public function __construct()
   {
 		$this->cache_length = Config::get('voltage.cache_length');
+		$this->log_message = "voltage/api/";
 
 		$this->client = new Client([
 			'cookies' => false,
