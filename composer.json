@@ -1,5 +1,5 @@
 {
-    "name": "completeequipmentgroup/voltage-api",
+    "name": "cegrent/voltage-api",
     "description": "Voltage API Laravel Package",
     "type": "library",
     "require": {
@@ -9,12 +9,12 @@
     "authors": [
         {
             "name": "Benjamin Bowles",
-            "email": "ben.bowles@Completeequipmentgroup.uk"
+            "email": "ben.bowles@ceg.rent"
         }
     ],
     "autoload": {
        "psr-4": {
-         "Completeequipmentgroup\\Voltage\\": "src"
+         "cegrent\\Voltage\\": "src"
        }
    },
    "scripts": {

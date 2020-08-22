@@ -1,6 +1,6 @@
 <?php
 
-namespace Completeequipmentgroup\Voltage;
+namespace Cegrent\Voltage;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Completeequipmentgroup\Voltage;
+namespace Cegrent\Voltage;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -24,7 +24,7 @@ class VoltageServiceProvider extends ServiceProvider
     public function register()
     {
       $this->app->bind('Voltage',function(){
-          return new \Completeequipmentgroup\Voltage\VoltageAPI;
+          return new \Cegrent\Voltage\VoltageAPI;
       });
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Completeequipmentgroup\Voltage;
+namespace Cegrent\Voltage;
 
 use Illuminate\Support\Facades\Facade;
 
