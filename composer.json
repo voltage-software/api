@@ -14,7 +14,7 @@
     ],
     "autoload": {
        "psr-4": {
-         "cegrent\\Voltage\\": "src"
+         "Cegrent\\Voltage\\": "src"
        }
    },
    "scripts": {
