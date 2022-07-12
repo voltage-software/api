@@ -22,17 +22,22 @@ class VoltageAPI
 	protected $client;
 
 	public function __construct()
-  {
+	{
 		$this->cache_length = Config::get('voltage.cache_length');
 		$this->log_message = "voltage/api/";
 
-		$this->client = new Client([
-			'cookies' => false,
-			'headers' => array('Authorization' => 'Bearer ' . Config::get('voltage.api_password')),
-			'base_uri' => Config::get('voltage.api_url'),
-			'http_errors' => true
+		$this->request = Http::withOptions([
+			'debug' => false,
+		])
+		->retry(2, 50, function ($exception) {
+			return $exception instanceof ConnectionException;
+		})
+		->baseUrl(Config::get('voltage.api_url'))
+		->acceptJson()
+		->withHeaders([
+			"Authorization" => 'Bearer ' . Config::get('voltage.api_password')
 		]);
-  }
+}
 
 	/**
 	*	get
