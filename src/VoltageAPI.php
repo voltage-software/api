@@ -4,14 +4,18 @@ namespace Cegrent\Voltage;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Http\Client\Request;
+
+use Illuminate\Http\Client\RequestException;
+use Illuminate\Http\Client\ConnectionException;
+use Illuminate\Http\Client\ClientException;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7;
-use GuzzleHttp\Exception\RequestException;
 
 class VoltageAPI
 {
@@ -101,31 +105,54 @@ class VoltageAPI
 			$path = $stub."?".$this->params($params);
 			// create a cache key
 			$cache_key = base64_encode($path);
-
+	
 			// check cache exists
 			if($cache && $this->cache_length > 0 && $this->hasCache($cache_key)) {
 				// get cached object
-				$data = $this->getCache($cache_key);
+				return $this->getCache($cache_key);
 			} else {
 				// log info for request
 				Log:info($this->log_message.' ('.$method.') '.$path);
-
+	
 				// do live request
-				$data = $this->client->request($method, $path, ['json' => $array])->getBody()->getContents();
+	
+				if($method == "get") {
+					$data = $this->request->get($stub, $params);
+				}
 
+				if($method == "put") {
+					$data = $this->request->put($stub, $array);
+				}
+	
+				if($method == "post") {
+					$data = $this->request->post($stub, $array);
+				}
+
+				if($method == "delete") {
+					$data = $this->request->delete($stub, $params);
+				}
+			}
+	
+			if($data->successful()) {
+				// collect
+				$return = $data->collect();
+	
 				// are we caching?
 				if($this->cache_length > 0) {
 					// cache request
 					$this->cache($data, $cache_key);
 				}
+	 				
+				return $return;
+			} elseif($data->serverError()) {
+				$data->throw();			
+			} elseif($data->failed()) {
+				$data->throw();			
 			}
-
-			// json_decode the object
-			return json_decode($data, true);
-		} catch (ClientException $e) {
-			return array('error' => $e->getMessage());
-	 	} catch (RequestException $e) {
-			return array('error' => $e->getMessage());
+		} catch(RequestException $e) {
+			report($e);	
+		} catch(ConnectionException $e) {
+			report($e);	
 		}
 	}
 
